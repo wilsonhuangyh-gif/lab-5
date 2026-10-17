@@ -18,6 +18,16 @@ def main():
 
     args = parser.parse_args()
 
+    with open("people.csv") as f:
+        rows = list(csv.reader(f))
+
+        header = rows[0]
+        col = header.index(args.column)
+
+        for row in rows[1:]:
+            if row[col] == args.value:
+                print(",".join(row))
+
     # TODO: open args.filename and read it with csv.reader. The first row is the
     #   header. Find the position of args.column within the header, then print every
     #   data row (its values joined by commas) whose value in that column equals
